@@ -163,7 +163,7 @@ cmd_default() {
 		branch_count=$(git_local_branches | grep -v "^${master_branch}\$" | wc -l)
 		if [ "$branch_count" -eq 0 ]; then
 			should_check_existence=NO
-			default_suggestion=$(git config --get hubflow.branch.develop || echo develop)
+			default_suggestion=$(git config --get hubflow.branch.develop || echo dev)
 		else
 			echo
 			echo "Which branch should be used for integration of the \"next release\"?"
@@ -330,7 +330,7 @@ cmd_default() {
 
 	# Version tag prefix
 	if ! git config --get hubflow.prefix.versiontag >/dev/null 2>&1 || flag force; then
-		default_suggestion=$(git config --get hubflow.prefix.versiontag || echo "")
+		default_suggestion=$(git config --get hubflow.prefix.versiontag || echo "fix: #")
 		printf "Version tag prefix? [$default_suggestion] "
 		if flag ask; then
 			read answer
